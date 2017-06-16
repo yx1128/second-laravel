@@ -104,6 +104,7 @@ Route::post('/replies', 'RepliesController@store')->name('replies.store')->middl
 Route::delete('replies/delete/{id}', 'RepliesController@destroy')->name('replies.destroy')->middleware('auth');
 
 # ------------------ Topic ------------------------
+Route::get('/topics/home', 'TopicsController@home')->name('topics.home');
 Route::get('/topics', 'TopicsController@index')->name('topics.index');
 Route::get('/topics/create', 'TopicsController@create')->name('topics.create')->middleware('verified_email');
 Route::post('/topics', 'TopicsController@store')->name('topics.store')->middleware('verified_email');

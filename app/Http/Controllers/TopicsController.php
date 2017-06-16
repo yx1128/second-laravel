@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use Phphub\Core\CreatorListener;
 use App\Models\Topic;
+use App\Models\Machine;
 use App\Models\SiteStatus;
 use App\Models\Link;
 use App\Models\Notification;
@@ -33,6 +34,14 @@ class TopicsController extends Controller implements CreatorListener
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
+
+    }
+
+    public function home()
+    {
+        $topics = Topic::allFromCache();
+
+        return view('topics.home', compact('topics'));
     }
 
     public function index(Request $request, Topic $topic)
@@ -133,7 +142,7 @@ class TopicsController extends Controller implements CreatorListener
                 ->values($data)
                 ->dimensions(800,400)
                 ->responsive(false);
-                
+
             return view('discussions.show', compact(
                                 'machine', 'user','topic', 'replies', 'categoryTopics',
                                 'category', 'banners', 'cover',

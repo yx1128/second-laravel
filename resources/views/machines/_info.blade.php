@@ -20,6 +20,8 @@
             </a>
           <hr>
 
+      @if ($currentUser && $currentUser->id != $user->id)
+         <hr>
         @if ($currentUser->subscrib($machine))
             <a data-method="post" class="btn btn-default btn-block" href="javascript:void(0);" data-url="{{ route('machines.unsubscribe', $machine->id) }}">
               <i class="fa fa-minus"></i> 取消关注
@@ -31,6 +33,7 @@
                 </a>
             </div>
         @endif
+      @endif  
 
        </div>
     </div>

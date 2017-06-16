@@ -39,6 +39,8 @@
                             <?php
                                 if ($activity->type == 'BlogHasNewArticle') {
                                     $indentifiers[] = $activity->indentifier;
+                                }elseif($activity->type == 'MachineHasNewDiscussion'){
+                                    $indentifiers[] = $activity->indentifier;
                                 }
                             ?>
                         @endforeach

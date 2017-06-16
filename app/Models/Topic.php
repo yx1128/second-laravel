@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Cache;
+use DB;
 use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Topic extends Model
@@ -67,6 +68,11 @@ class Topic extends Model
         static::created(function ($topic) {
             SiteStatus::newTopic();
         });
+
+        static::saving(function($model) {
+            Cache::forget('topics');
+        });
+
     }
 
     public function votes()
@@ -225,4 +231,34 @@ class Topic extends Model
         $names = $this->isDiscussion() ? 'discussions.show' : 'topics.show';
         return route($names, $params);
     }
+
+    public static function allFromCache($expire = 0)
+    {
+      $data = Cache::remember('topics', 60, function () {
+            $raw_topics = self::orderBy('created_at', 'desc')->paginate(50);
+            $sorted = [];
+
+            $sorted['xinwen'] = $raw_topics->filter(function ($item) {
+                return $item->category_id == '1';
+            });
+            $sorted['wenda'] = $raw_topics->filter(function ($item) {
+                return $item->category_id == '4';
+            });
+            $sorted['fenxiang'] = $raw_topics->filter(function ($item) {
+                return $item->category_id == '5';
+            });
+            $sorted['jiaocheng'] = $raw_topics->filter(function ($item) {
+
+                return $item->category_id == '6';
+            });
+            $sorted['zhuanlan'] = $raw_topics->filter(function ($item) {
+                return $item->category_id == '8';
+            });
+            $sorted['shebei'] = $raw_topics->filter(function ($item) {
+                return $item->category_id == '9';
+            });
+          return $sorted;
+      });
+      return $data;
+  }
 }

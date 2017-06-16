@@ -14,6 +14,7 @@ use App\Models\Value;
 use Auth;
 use Flash;
 use Charts;
+use App\Activities\UserSubscribedMachine;
 
 
 class MachinesController extends Controller
@@ -76,8 +77,8 @@ class MachinesController extends Controller
           $machine = Machine::findOrFail($id);
           Auth::user()->subscriber()->attach($machine->id);
           $machine->increment('subscriber_count', 1);
-          Flash::success("订阅成功");
-          //app(UserSubscribedBlog::class)->generate(Auth::user(), $blog);
+          Flash::success("关注成功");
+          app(UserSubscribedMachine::class)->generate(Auth::user(), $machine);
           return redirect()->back();
        }
 
@@ -86,8 +87,8 @@ class MachinesController extends Controller
           $machine = Machine::findOrFail($id);
           Auth::user()->subscriber()->detach($machine->id);
           $machine->decrement('subscriber_count', 1);
-          Flash::success("成功取消订阅");
-          //app(UserSubscribedBlog::class)->remove(Auth::user(), $blog);
+          Flash::success("成功取消关注");
+          app(UserSubscribedMachine::class)->remove(Auth::user(), $machine);
           return redirect()->back();
        }
 }

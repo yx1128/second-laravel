@@ -37,7 +37,7 @@ class Machine extends Model
 
   public function links($params = [])
   {
-      return route('wildcards', array_merge([$this->slug], $params));
+      return route('machines.show', array_merge([$this->id], $params));
   }
 
 }

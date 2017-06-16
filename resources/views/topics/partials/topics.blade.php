@@ -3,7 +3,7 @@
 @if (count($topics))
 
 <ul class="list-group row topic-list">
-    @foreach ($topics as $topic)
+    @foreach ($topics as $topic )
 
          <li class="list-group-item ">
 
@@ -40,14 +40,23 @@
             <div class="infos">
 
               <div class="media-heading">
-
+          @if($topic->category->id == 9)
                 @if ($topic->order > 0 && !Input::get('filter') && Route::currentRouteName() != 'home' )
                     <span class="hidden-xs label label-warning">{{ lang('Stick') }}</span>
                 @else
                     {{-- @if (!Request::is('categories/'.config('phphub.blog_category_id'))) --}}
-                        <span class="hidden-xs label label-{{ ($topic->is_excellent == 'yes' && Route::currentRouteName() != 'home') ? 'success' : 'default' }}">{{{ $topic->category->name }}}</span>
+                        <span class="hidden-xs label label-{{ ($topic->is_excellent == 'yes' && Route::currentRouteName() != 'home') ? 'success' : 'default' }}">{{{ $topic->category->name }}}-{{{$topic->machines()->first()->name}}}</span>
                     {{-- @endif --}}
                 @endif
+              @else
+              @if ($topic->order > 0 && !Input::get('filter') && Route::currentRouteName() != 'home' )
+                  <span class="hidden-xs label label-warning">{{ lang('Stick') }}</span>
+              @else
+                  {{-- @if (!Request::is('categories/'.config('phphub.blog_category_id'))) --}}
+                      <span class="hidden-xs label label-{{ ($topic->is_excellent == 'yes' && Route::currentRouteName() != 'home') ? 'success' : 'default' }}">{{{ $topic->category->name }}}</span>
+                  {{-- @endif --}}
+              @endif
+         @endif
 
                 <a href="{{ $topic->link() }}" title="{{{ $topic->title }}}">
                     {{{ $topic->title }}}

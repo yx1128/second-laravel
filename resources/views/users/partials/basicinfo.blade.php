@@ -181,7 +181,7 @@
    <div class="padding-sm user-basic-nav">
        <ul class="list-group">
              <a href="{{ route('users.articles', $user->id) }}" class="{{ navViewActive('users.articles') }}">
-                 <li class="list-group-item"><i class="text-md fa fa-headphones"></i> Ta 发布的文章</li>
+                 <li class="list-group-item"><i class="text-md fa fa-headphones"></i> Ta 专栏的文章</li>
              </a>
 
              <a href="{{ route('users.topics', $user->id) }}" class="{{ navViewActive('users.topics') }}">

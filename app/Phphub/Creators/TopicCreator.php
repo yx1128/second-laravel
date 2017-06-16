@@ -9,7 +9,10 @@ use Carbon\Carbon;
 use Phphub\Markdown\Markdown;
 use Illuminate\Support\MessageBag;
 use App\Activities\UserPublishedNewTopic;
+use App\Activities\MachineHasNewDiscussion;
 use App\Activities\BlogHasNewArticle;
+
+
 
 class TopicCreator
 {
@@ -76,13 +79,16 @@ class TopicCreator
             Auth::user()->increment('article_count', 1);
             $blog->increment('article_count', 1);
             app(BlogHasNewArticle::class)->generate(Auth::user(), $topic, $topic->blogs()->first());
-        } elseif ($topic->isDiscussion() && $topic->is_draft == 'yes') {
+        }
+
+        if ($topic->isDiscussion() && $topic->is_draft == 'yes') {
             Auth::user()->increment('draft_count', 1);
         } elseif ($topic->isDiscussion()) {
             Auth::user()->increment('discussion_count', 1);
             //$machine->increment('article_count', 1);
-            //app(BlogHasNewArticle::class)->generate(Auth::user(), $topic, $topic->blogs()->first());
-        } else {
+            //app(MachineHasNewDiscussion::class)->generate(Auth::user(), $topic, $topic->machines()->first());
+        }
+        else {
             Auth::user()->increment('topic_count', 1);
         }
 
