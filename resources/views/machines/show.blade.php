@@ -8,6 +8,11 @@
 
 <div class="blog-pages">
 
+
+        <div class="col-md-3 main-col pull-left">
+            @include('machines._info')
+        </div>
+
           <div class="col-md-9 left-col pull-right">
 
               <div class="panel article-body article-index">
@@ -31,6 +36,10 @@
                              </select>
                         </div>
                   </form>
+                  <hr>
+                  @if($machine->image != null)
+                    @include('machines._images')
+                  @endif
                 </div>
               </div>
       <div class="panel article-body article-index">
@@ -66,9 +75,7 @@
                           @else
                             <div class="empty-block">{{ lang('Dont have any data Yet') }}~~</div>
                           @endif
-                          <!--@foreach ($points as $point)
-                            <h4>{{ $point->id }}</h4>
-                          @endforeach-->
+
 
 
 
@@ -82,9 +89,7 @@
         </div>
 
 
-        <div class="col-md-3 main-col pull-left">
-            @include('machines._info')
-        </div>
+
 
 </div>
 

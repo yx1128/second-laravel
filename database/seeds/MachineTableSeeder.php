@@ -70,6 +70,22 @@ class MachineTableSeeder extends Seeder
               'created_at' => '2017-01-17 14:35:47',
               'updated_at' => '2017-01-17 14:35:47',
           ),
+          4 =>
+          array (
+              'id' => 5,
+              'name' => 'C1C2',
+              'slug' => 'C1C2',
+              'description' => '设备#C1C2描述',
+              'cover' => 'http://phphub5.app/favicon1.png',
+              'user_id' => 5,
+              'data_count' => 0,
+              'subscriber_count' => 0,
+              'is_recommended' => 0,
+              'is_blocked' => 0,
+              'created_at' => '2017-01-17 14:35:47',
+              'updated_at' => '2017-01-17 14:35:47',
+              'image' =>  'http://phphub5.app/assets/images/machines/C1C2.jpg',
+          ),
       ));
 
   }

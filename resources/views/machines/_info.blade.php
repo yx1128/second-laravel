@@ -18,9 +18,7 @@
             <a href="{{ route('machines.show', $machine->id )}}">
              <li class="list-group-item"><i class="text-md fa fa-list-ul"></i> &nbsp;设备讨论（{{ $machine->article_count }}）</li>
             </a>
-          <hr>
-
-      @if ($currentUser && $currentUser->id != $user->id)
+      @if ($currentUser)
          <hr>
         @if ($currentUser->subscrib($machine))
             <a data-method="post" class="btn btn-default btn-block" href="javascript:void(0);" data-url="{{ route('machines.unsubscribe', $machine->id) }}">
@@ -33,7 +31,7 @@
                 </a>
             </div>
         @endif
-      @endif  
+      @endif
 
        </div>
     </div>
